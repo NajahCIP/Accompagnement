@@ -140,10 +140,10 @@ Remplacer **USERNAME** par votre nom PythonAnywhere.
 Si votre page **Contact** envoie un email en local, vous devez reproduire la configuration en **production** sur PythonAnywhere.
 
 Pour cela, deux étapes sont nécessaires et complémentaires :
+
 ➡️ **Étape 1 : configurer `production.py`**
 
 ➡️ **Étape 2 : définir les variables d’environnement sur PythonAnywhere**
-
 
 ### **Étape 1 — Ajouter la configuration email dans `production.py`**
 
@@ -169,17 +169,20 @@ Cette configuration indique à Django d'utiliser Gmail et de récupérer les ide
 
 ### **Étape 2 — Définir les variables d’environnement dans PythonAnywhere**
 
-1. Aller dans **Web → Environment variables**
-2. Ajouter les deux variables suivantes :
+Dans PythonAnywhere, il n’y a **pas** de section “Environment variables”.
+Vous devez ajouter les variables directement dans votre fichier **WSGI**.
 
+1. Aller dans **Web → WSGI configuration file** (`/var/www/..._wsgi.py`)
+2. En haut du fichier, ajouter :
+
+```python
+import os
+
+os.environ["EMAIL_HOST_USER"] = "ton_email@gmail.com"
+os.environ["EMAIL_HOST_PASSWORD"] = "TON_MDP_APPLICATION_GMAIL"
 ```
-EMAIL_HOST_USER=ton_email@gmail.com
-EMAIL_HOST_PASSWORD=TON_MDP_APPLICATION_GMAIL
-```
 
-➡️ Remplacez par votre adresse Gmail et *votre mot de passe d’application Gmail*.
-
-➡️ Ne jamais mettre d’espaces avant ou après le `=`.
+➡️ Remplacez par votre adresse Gmail et **votre mot de passe d’application Gmail**.
 
 3. Enregistrer puis cliquer sur **Reload** de la Web App.
 

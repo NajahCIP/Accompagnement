@@ -101,7 +101,7 @@
     form textarea:focus,
     form select:focus {
         outline: none;
-        border-color: #2563eb;
+        border-color:  #374151;
         box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
     }
 
@@ -139,7 +139,7 @@
         <div class="contact-grid">
             <!-- Infos de contact -->
             <div>
-                <h2 style="font-size:1.15rem; margin-bottom:0.75rem;">Nous écrire</h2>
+                <h2 style="font-size:1.15rem; margin-bottom:0.75rem;">Me contacter</h2>
 
                 {% if page.contact_text %}
                     {{ page.contact_text|richtext }}
@@ -153,14 +153,10 @@
                     <strong>Email :</strong>
                     {{ page.contact_email|default:"contact@monsitepro.fr" }}<br>
 
-                    {% if page.contact_phone %}
-                        <strong>Téléphone :</strong> {{ page.contact_phone }}<br>
-                    {% else %}
-                        <strong>Téléphone :</strong> +33 6 12 34 56 78<br>
-                    {% endif %}
+                   
 
                     <strong>Adresse :</strong>
-                    {{ page.contact_address|default:"123 Rue de l’Exemple, 75000 Paris" }}
+                    {{ page.contact_address|default:"Lyon" }}
                 </p>
             </div>
 

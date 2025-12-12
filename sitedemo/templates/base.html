@@ -8,7 +8,8 @@
 
     {# Ici on peut charger un fichier CSS dans /static/ plus tard si on veut #}
     {# <link rel="stylesheet" href="{% static 'css/style.css' %}"> #}
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     {# Styles simples intégrés pour l'exemple #}
     <style>
         /* Reset très simple */
@@ -32,7 +33,7 @@
 
         /* Layout */
         header {
-            background: #ffe6f0;
+            background: #FFFFFF;
             border-bottom: 1px solid #ffe6f0;
             position: sticky;
             top: 0;
@@ -140,22 +141,30 @@
             margin-top: 0.5rem;
         }
 
-        .social-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 999px;
-            border: 1px solid #4b5563;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            color: #e5e7eb;
-        }
+    .social-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid #ff99bb;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem; /* Taille légèrement augmentée pour les icônes */
+        color: #ff99bb; /* Couleur des icônes (jaune clair) */
+        background: transparent;
+    }
 
-        .social-icon:hover {
-            background: #e5e7eb;
-            color: #111827;
-        }
+    .social-icon:hover {
+        background: #ff99bb; /* Fond jaune clair au survol */
+        color: #333333; /* Couleur des icônes au survol (noir pour contraste) */
+        border-color: #ff99bb;
+    }
+
+    /* Assurez-vous que les icônes sont bien centrées et visibles */
+    .social-icon i {
+        font-size: 1rem; /* Taille des icônes */
+        line-height: 1; /* Alignement vertical */
+    }
 
         .footer-bottom {
             text-align: center;
@@ -229,7 +238,7 @@
             <div class="footer-column">
                 <h4>Accompagnement</h4>
                 <p style="font-size:0.9rem; color:#9ca3af;">
-                    Un exemple de site vitrine moderne avec Wagtail.
+                    Premier contact gratuit et sans engagement.
                 </p>
             </div>
 
@@ -248,16 +257,18 @@
                 <h4>Suivez-nous</h4>
                 <p style="font-size:0.9rem; color:#9ca3af;">Retrouvez-nous sur les réseaux sociaux :</p>
                 <div class="social-icons">
-                    <!-- Icônes sociales simples (texte pour l'exemple) -->
-    
-                    <a href="#" class="social-icon" aria-label="LinkedIn">in</a>
-                    <a href="#" class="social-icon" aria-label="Instagram">IG</a>
+                    <a href="https://www.linkedin.com/feed/" target="_blank" aria-label="LinkedIn" class="social-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.instagram.com/najah7256/#" target="_blank" aria-label="Instagram" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
                 </div>
             </div>
         </div>
 
         <div class="footer-bottom">
-            &copy; {% now "Y" %} Accompagnement · Tous droits réservés.
+            &copy; {% now "Y" %} Accompagnement
         </div>
     </div>
 </footer>

@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags %} 
+{% load static wagtailcore_tags %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,17 +6,13 @@
     <title>{% block title %}Mon site vitrine{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {# Ici on peut charger un fichier CSS dans /static/ plus tard si on veut #}
-    {# <link rel="stylesheet" href="{% static 'css/style.css' %}"> #}
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    {# Styles simples intégrés pour l'exemple #}
+
     <style>
-        /* Reset très simple */
         * {
             box-sizing: border-box;
             margin: 0;
-   
         }
 
         body {
@@ -31,13 +27,12 @@
             color: inherit;
         }
 
-        /* Layout */
         header {
-            background: #FFFFFF;
+            background: #ffffff;
             border-bottom: 1px solid #ffe6f0;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 20;
         }
 
         .container {
@@ -58,6 +53,7 @@
             font-size: 1.25rem;
         }
 
+        /* NAV DESKTOP */
         .nav-links {
             display: flex;
             gap: 1.5rem;
@@ -71,6 +67,33 @@
 
         .nav-links a:hover {
             border-bottom-color: #ff99bb;
+        }
+
+        /* BOUTON BURGER */
+        .burger {
+            display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            color: #ff6699;
+            cursor: pointer;
+        }
+
+        /* MENU MOBILE */
+        #mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: #ffffff;
+            border-top: 1px solid #ffe6f0;
+        }
+
+        #mobile-menu a {
+            padding: 0.9rem 1.5rem;
+            border-bottom: 1px solid #ffe6f0;
+        }
+
+        #mobile-menu a:hover {
+            background: #ffe6f0;
         }
 
         .btn-primary {
@@ -108,7 +131,6 @@
             flex-wrap: wrap;
             gap: 2rem;
             justify-content: space-between;
-            align-items: flex-start;
             padding-bottom: 1.5rem;
             border-bottom: 1px solid #374151;
         }
@@ -141,30 +163,21 @@
             margin-top: 0.5rem;
         }
 
-    .social-icon {
-        width: 34px;
-        height: 34px;
-        border-radius: 999px;
-        border: 1px solid #ff99bb;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem; /* Taille légèrement augmentée pour les icônes */
-        color: #ff99bb; /* Couleur des icônes (jaune clair) */
-        background: transparent;
-    }
+        .social-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            border: 1px solid #ff99bb;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff99bb;
+        }
 
-    .social-icon:hover {
-        background: #ff99bb; /* Fond jaune clair au survol */
-        color: #333333; /* Couleur des icônes au survol (noir pour contraste) */
-        border-color: #ff99bb;
-    }
-
-    /* Assurez-vous que les icônes sont bien centrées et visibles */
-    .social-icon i {
-        font-size: 1rem; /* Taille des icônes */
-        line-height: 1; /* Alignement vertical */
-    }
+        .social-icon:hover {
+            background: #ff99bb;
+            color: #333333;
+        }
 
         .footer-bottom {
             text-align: center;
@@ -173,31 +186,17 @@
             color: #ffccdd;
         }
 
-        /* Sections génériques */
-        section {
-            padding: 3rem 0;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .section-subtitle {
-            font-size: 0.95rem;
-            color: #6b7280;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.75rem;
+        @media (max-width: 744px) {
+            .nav-links {
+                display: none;
             }
 
-            .nav-links {
-                flex-wrap: wrap;
+            .burger {
+                display: block;
+            }
+
+            #mobile-menu.show {
+                display: flex;
             }
 
             .footer-top {
@@ -205,31 +204,42 @@
             }
         }
     </style>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("mobile-menu").classList.toggle("show");
+        }
+    </script>
 </head>
+
 <body>
 
 <header>
     <div class="container">
         <nav class="nav">
-            <div class="logo">
-                <!-- Logo / Nom du site -->
-                Accompagnement<span style="color:#000000;"></span>
-            </div>
+            <div class="logo">Accompagnement</div>
+
             <div class="nav-links">
-                <!-- Rappel navigation header (liens vers les pages principales) -->
                 <a href="/">Accueil</a>
                 <a href="/nos-services/">Nos services</a>
                 <a href="/a-propos/">À propos</a>
                 <a href="/contact/">Contact</a>
             </div>
+
+            <button class="burger" onclick="toggleMenu()">☰</button>
         </nav>
+
+        <div id="mobile-menu">
+            <a href="/">Accueil</a>
+            <a href="/nos-services/">Nos services</a>
+            <a href="/a-propos/">À propos</a>
+            <a href="/contact/">Contact</a>
+        </div>
     </div>
 </header>
 
 <main>
-    {% block content %}
-    {# Contenu spécifique à chaque page #}
-    {% endblock %}
+    {% block content %}{% endblock %}
 </main>
 
 <footer>
@@ -245,7 +255,6 @@
             <div class="footer-column">
                 <h4>Navigation</h4>
                 <ul class="footer-links">
-                    <!-- Rappel navigation dans le footer -->
                     <li><a href="/">Accueil</a></li>
                     <li><a href="/nos-services/">Nos services</a></li>
                     <li><a href="/a-propos/">À propos</a></li>
@@ -255,12 +264,14 @@
 
             <div class="footer-column">
                 <h4>Suivez-nous</h4>
-                <p style="font-size:0.9rem; color:#9ca3af;">Retrouvez-nous sur les réseaux sociaux :</p>
+                <p style="font-size:0.9rem; color:#9ca3af;">
+                    Retrouvez-nous sur les réseaux sociaux :
+                </p>
                 <div class="social-icons">
-                    <a href="https://www.linkedin.com/feed/" target="_blank" aria-label="LinkedIn" class="social-icon">
+                    <a href="https://www.linkedin.com/in/najah7256/" target="_blank" class="social-icon">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="https://www.instagram.com/najah7256/#" target="_blank" aria-label="Instagram" class="social-icon">
+                    <a href="https://www.instagram.com/najah7256/" target="_blank" class="social-icon">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>

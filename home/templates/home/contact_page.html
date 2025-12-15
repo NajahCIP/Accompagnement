@@ -11,31 +11,40 @@
 
     .contact-section {
         padding: 3rem 0;
+        background: #ffe6f0;
     }
 
     .contact-grid {
         margin-top: 2rem;
         display: grid;
-        gap: 2rem;
+        gap: 3rem;
         grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
     }
 
     .contact-intro-text {
-        font-size: 0.95rem;
+        font-size: 1rem;
         color: #4b5563;
-        margin-bottom: 0.75rem;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .contact-text-block {
+        margin-bottom: 2.5rem;
     }
 
     .contact-infos {
         font-size: 0.95rem;
         color: #4b5563;
+        line-height: 1.8;
+        margin-top: 1.5rem;
     }
 
     .contact-card {
         background: white;
         border-radius: 1rem;
-        padding: 1.5rem;
+        padding: 2rem;
         border: 1px solid #e5e7eb;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     .contact-form-group {
@@ -68,7 +77,7 @@
         margin-bottom: 0.75rem;
     }
 
-        /* Style général pour les champs du formulaire Wagtail */
+    /* Style général pour les champs du formulaire Wagtail */
     form p {
         margin-bottom: 1rem;
     }
@@ -101,7 +110,7 @@
     form textarea:focus,
     form select:focus {
         outline: none;
-        border-color:  #374151;
+        border-color: #374151;
         box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
     }
 
@@ -109,7 +118,6 @@
     form input[type="submit"] {
         margin-top: 1rem;
     }
-
 
     /* =======================
        Version mobile
@@ -122,6 +130,11 @@
 
         .contact-grid {
             grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .contact-text-block {
+            margin-bottom: 2rem;
         }
     }
 </style>
@@ -133,30 +146,32 @@
             {{ page.intro_title|default:"Contact" }}
         </h1>
         <p class="section-subtitle">
-            {{ page.intro_subtitle|default:"Utilisez cette page pour permettre à vos visiteurs de vous écrire facilement." }}
+            {{ page.intro_subtitle|default:"N'hésitez pas à me contacter, pour prendre rendez-vous. Je serais ravie d'échanger avec vous." }}
         </p>
 
         <div class="contact-grid">
             <!-- Infos de contact -->
             <div>
-                <h2 style="font-size:1.15rem; margin-bottom:0.75rem;">Me contacter</h2>
+                <!-- Bloc de texte avec espace en dessous -->
+                <div class="contact-text-block">
+                    {% if page.contact_text %}
+                        {{ page.contact_text|richtext }}
+                    {% else %}
+                        <p class="contact-intro-text">
+                            <strong>Premier contact gratuit et sans engagement.</strong> Prenez le temps de me présenter vos besoins, nous verrons ensemble, comment je peux vous accompagner au mieux.
+                        </p>
+                    {% endif %}
+                </div>
 
-                {% if page.contact_text %}
-                    {{ page.contact_text|richtext }}
-                {% else %}
-                    <p class="contact-intro-text">
-                        Ce formulaire peut vous servir de base pour une vraie page contact. Vous pourrez ensuite le relier à un modèle Wagtail ou à un système d’envoi d’email.
-                    </p>
-                {% endif %}
+                <!-- L'image ajoutée depuis Wagtail admin apparaîtra ici automatiquement -->
 
+                <!-- Informations de contact -->
                 <p class="contact-infos">
                     <strong>Email :</strong>
-                    {{ page.contact_email|default:"contact@monsitepro.fr" }}<br>
-
-                   
+                    {{ page.contact_email|default:"aljanenajah@gmail.com" }}<br>
 
                     <strong>Adresse :</strong>
-                    {{ page.contact_address|default:"Lyon" }}
+                    {{ page.contact_address|default:"Lyon, France" }}
                 </p>
             </div>
 
